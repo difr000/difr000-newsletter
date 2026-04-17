@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Difr000 information Newsletter</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070a;
+      --panel: rgba(8, 15, 20, 0.84);
+      --panel-strong: rgba(9, 22, 29, 0.96);
+      --line: rgba(87, 233, 255, 0.18);
+      --line-strong: rgba(87, 233, 255, 0.38);
+      --text: #e7f7fb;
+      --muted: #9eb4bd;
+      --soft: #c6d8dd;
+      --cyan: #57e9ff;
+      --green: #6dffb2;
+      --red: #ff5b7c;
+      --amber: #ffc857;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(87, 233, 255, 0.12), transparent 34rem),
+        radial-gradient(circle at 86% 9%, rgba(109, 255, 178, 0.1), transparent 32rem),
+        linear-gradient(180deg, #05070a 0%, #071015 44%, #05070a 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(87, 233, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(87, 233, 255, 0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.16));
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .signal::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(109, 255, 178, 0.8);
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(87, 233, 255, 0.12), transparent 42%),
+        linear-gradient(90deg, rgba(255, 91, 124, 0.1), transparent 72%),
+        var(--panel-strong);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--green), var(--red));
+    }
+
+    .hero-inner {
+      padding: clamp(26px, 4vw, 48px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 6vw, 68px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      max-width: 900px;
+    }
+
+    .deck {
+      margin: 18px 0 0;
+      color: var(--soft);
+      max-width: 760px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .meta-card {
+      min-width: 210px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(5, 10, 14, 0.62);
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 32px;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0 34px;
+    }
+
+    .nav a {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(8, 15, 20, 0.72);
+      border-radius: 8px;
+      padding: 16px 18px;
+      color: var(--text);
+      min-height: 58px;
+      align-items: center;
+    }
+
+    .nav a:hover,
+    .article a:hover {
+      border-color: var(--line-strong);
+      color: var(--cyan);
+    }
+
+    .section {
+      margin-top: 42px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 15px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      letter-spacing: 0;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .article {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(87, 233, 255, 0.06), transparent 35%),
+        var(--panel);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .article-inner {
+      padding: clamp(18px, 3vw, 28px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      margin: 0 0 14px;
+      font-size: clamp(20px, 3vw, 28px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      display: grid;
+      gap: 9px;
+      color: #d5e7ec;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .summary p {
+      margin: 0;
+    }
+
+    .sources {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(87, 233, 255, 0.13);
+    }
+
+    .sources-title {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .sources ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .sources a {
+      display: block;
+      overflow-wrap: anywhere;
+      text-decoration: none;
+      color: var(--soft);
+      border: 1px solid rgba(87, 233, 255, 0.14);
+      background: rgba(5, 9, 13, 0.62);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 44px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+        padding-top: 24px;
+      }
+
+      .topbar,
+      .hero-inner,
+      .section-head {
+        display: block;
+      }
+
+      .signal {
+        margin-bottom: 10px;
+      }
+
+      .meta-card {
+        margin-top: 22px;
+        min-width: 0;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+
+      body::before,
+      .nav {
+        display: none;
+      }
+
+      .shell {
+        width: 100%;
+        padding: 0;
+      }
+
+      .hero,
+      .article,
+      .meta-card {
+        box-shadow: none;
+        background: #fff;
+        color: #111;
+        break-inside: avoid;
+      }
+
+      .summary,
+      .deck,
+      .sources a,
+      .footer,
+      .count,
+      .eyebrow {
+        color: #222;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <span class="signal">Difr000 briefing channel</span>
+      <span>Wydanie: 17 kwietnia 2026</span>
+    </div>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>Difr000 information Newsletter</h1>
+          <p class="deck">Przegląd najważniejszych tematów z obszaru cyberbezpieczeństwa, technologii, operacji informacyjnych i geopolityki. Każdy wpis zawiera krótkie streszczenie oraz komplet źródeł do dalszej analizy.</p>
+        </div>
+        <aside class="meta-card" aria-label="Liczba artykułów">
+          <strong id="totalCount">0</strong>
+          <span>opracowanych wpisów w dwóch sekcjach tematycznych</span>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Sekcje newslettera">
+      <a href="#it-cybersecurity"><span>IT & Cybersecurity</span><strong id="cyberCount">0</strong></a>
+      <a href="#geopolitics"><span>Geopolitics</span><strong id="geoCount">0</strong></a>
+    </nav>
+
+    <section class="section" id="it-cybersecurity">
+      <div class="section-head">
+        <h2>IT & Cybersecurity</h2>
+        <span class="count" id="cyberLabel">0 wpisów</span>
+      </div>
+      <div class="grid" id="cyberGrid"></div>
+    </section>
+
+    <section class="section" id="geopolitics">
+      <div class="section-head">
+        <h2>Geopolitics</h2>
+        <span class="count" id="geoLabel">0 wpisów</span>
+      </div>
+      <div class="grid" id="geoGrid"></div>
+    </section>
+
+    <footer class="footer">
+      Newsletter opracowany redakcyjnie na podstawie podanych materiałów źródłowych. Część serwisów może wymagać subskrypcji, logowania albo może zmienić treść po publikacji, dlatego linki źródłowe pozostają przy każdym wpisie.
+    </footer>
+  </main>
+
+  <script>
+    const articles = [
+      {
+        section: "IT & Cybersecurity",
+        title: "Blind Men and the Elephant: the story of cybersecurity",
+        summary: [
+          "Tekst pokazuje cyberbezpieczeństwo jako dziedzinę, w której punkt widzenia bardzo mocno zależy od doświadczenia zawodowego.",
+          "Autor porównuje branżę do przypowieści o ślepcach opisujących różne części słonia: każdy widzi prawdziwy fragment problemu, ale rzadko widzi całość.",
+          "Inaczej patrzą osoby z backgroundem inżynieryjnym, inaczej liderzy IT, specjaliści od compliance, byli wojskowi, prawnicy czy śledczy.",
+          "Najważniejszy wniosek jest taki, że nie istnieje jeden uniwersalny model programu bezpieczeństwa pasujący do każdej organizacji.",
+          "Dojrzałe podejście wymaga połączenia perspektywy technicznej, biznesowej, prawnej, operacyjnej i ryzyka, a także rozumienia realnych ograniczeń firmy.",
+          "To dobry materiał do refleksji dla CISO, founderów security i zespołów CTI, bo przypomina, że metodologia bez kontekstu może prowadzić do błędnych priorytetów."
+        ],
+        links: ["https://ventureinsecurity.net/p/blind-men-and-the-elephant-the-story?utm_source=post-email-title&publication_id=746596&post_id=193511796&utm_campaign=email-post-title&isFreemail=true&r=1wktm3&triedRedirect=true&utm_medium=email"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "I Tested 7 Python PDF Extractors So You Don’t Have To (2025 Edition)",
+        summary: [
+          "Materiał porównuje praktyczne podejścia do ekstrakcji treści z plików PDF w Pythonie, czyli problemu, który w analizie dokumentów nadal bywa trudniejszy niż wygląda.",
+          "PDF nie jest prostym formatem tekstowym, lecz formatem prezentacyjnym, dlatego różne biblioteki inaczej radzą sobie z układem strony, tabelami, obrazami i nietypowym kodowaniem.",
+          "Zestawienie jest przydatne dla osób budujących pipeline OCR, parsery raportów, ekstraktory IOC lub narzędzia do automatycznego streszczania dokumentów.",
+          "Dodatkowe źródła dobrze uzupełniają temat: nagranie pokazuje praktykę pracy z PDF, a klasyczny wpis Didiera Stevensa przypomina, jak wiele wariantów i pułapek może kryć jeden plik PDF.",
+          "Wniosek operacyjny jest prosty: przed wyborem biblioteki trzeba testować ją na własnym korpusie dokumentów, a nie tylko na przykładowych plikach z dokumentacji.",
+          "Dla zespołów bezpieczeństwa ważne jest też traktowanie PDF jako potencjalnie złośliwego kontenera, a nie tylko jako źródła tekstu."
+        ],
+        links: [
+          "https://onlyoneaman.medium.com/i-tested-7-python-pdf-extractors-so-you-dont-have-to-2025-edition-c88013922257",
+          "https://www.youtube.com/watch?v=w2r2Bg42UPY",
+          "https://blog.didierstevens.com/2008/04/29/pdf-let-me-count-the-ways/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Nowy portal do monitorowania ransomware - ciekawe funkcjonalności",
+        summary: [
+          "Portal MBSD CIG Ransomware Portal wygląda na narzędzie stworzone do obserwacji aktywności grup ransomware i porządkowania informacji o ofiarach, trendach oraz kampaniach.",
+          "Takie serwisy są użyteczne dla zespołów CTI, ponieważ skracają czas od wykrycia publikacji na leak site do oceny, czy dotyczy ona danej branży, regionu albo łańcucha dostaw.",
+          "Warto sprawdzić, czy portal oferuje filtrowanie po grupach, sektorach, krajach, dacie publikacji i statusie wycieku, bo to decyduje o jego wartości operacyjnej.",
+          "Dla organizacji dojrzałych bezpieczeństwowo podobne źródło może być elementem monitoringu brandu, third-party risk i wczesnego ostrzegania przed eskalacją incydentu.",
+          "Trzeba jednak pamiętać, że dane z leak site bywają niepełne, opóźnione albo celowo zmanipulowane przez operatorów ransomware.",
+          "Najlepsze wykorzystanie portalu to korelacja z własnymi telemetrycznymi źródłami, MISP, feedami IOC i informacjami od dostawców IR."
+        ],
+        links: ["https://www.mbsd.jp/cig-ransomware-portal/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Polskie wojsko dostarczy nam niebawem platformę AI?",
+        summary: [
+          "Wojsko Polskie opracowało platformę AIRON, która ma zapewniać bezpieczniejszą alternatywę dla komercyjnych narzędzi AI używanych online.",
+          "System działa już w środowisku MON i wspiera typowe zadania pracy z modelem: konwersację, tłumaczenia, streszczanie, analizę plików oraz budowę chatbotów opartych o RAG.",
+          "Ważnym elementem architektury jest AI Gateway, czyli centralny mechanizm integracji modeli z innymi aplikacjami przez API i kontrolowany dostęp do zasobów obliczeniowych.",
+          "Z perspektywy bezpieczeństwa najistotniejsze jest to, że platforma ma funkcjonować w ramach resortowych systemów teleinformatycznych i przetwarzać informacje zgodnie z dopuszczonym poziomem klauzuli.",
+          "Projekt wskazuje na rosnący trend budowania suwerennych, kontrolowanych środowisk AI dla administracji i wojska, zamiast polegania wyłącznie na publicznych usługach chmurowych.",
+          "Dalszy rozwój wersji EDGE może mieć znaczenie dla działań operacyjnych, gdzie liczą się praca offline, kontrola danych i odporność na zakłócenia."
+        ],
+        links: [
+          "https://cyberdefence24.pl/armia-i-sluzby/wojsko-polskie/platforma-ai-od-wojska-polskiego-dziala-juz-w-mon-ie",
+          "https://innpoland.pl/223930,polska-armia-ma-wlasna-platforme-ai-mon-odcina-sie-od-komercyjnych-gigantow"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Luka umożliwiająca podszywanie się pod powłokę systemu Windows",
+        summary: [
+          "CVE-2026-32202 dotyczy podatności klasy spoofing w komponencie Windows Shell, czyli obszarze szczególnie istotnym dla zaufania użytkownika do interfejsu systemu.",
+          "Tego typu błąd może pozwalać atakującemu na prezentowanie treści albo zachowania w sposób sugerujący, że pochodzą z zaufanego elementu systemu.",
+          "Ryzyko jest szczególnie istotne w scenariuszach phishingu lokalnego, dostarczania złośliwych plików i nakłaniania użytkownika do wykonania akcji w fałszywym kontekście.",
+          "NVD i MSRC powinny być traktowane jako źródła referencyjne dla oceny CVSS, zakresu dotkniętych wersji oraz dostępności poprawek.",
+          "Organizacje powinny priorytetowo aktualizować stacje robocze, szczególnie tam, gdzie użytkownicy często pracują z załącznikami i plikami zewnętrznymi.",
+          "Warto również monitorować, czy luka trafia do narzędzi phishingowych lub exploit kitów, ponieważ błędy spoofingowe często są używane jako element większego łańcucha ataku."
+        ],
+        links: [
+          "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-32202",
+          "https://nvd.nist.gov/vuln/detail/CVE-2026-32202"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Brak uwierzytelniania Fortinet FortiGate dla funkcji w demonie CAPWAP",
+        summary: [
+          "Fortinet opisuje błąd jako brak uwierzytelniania dla krytycznej funkcji w demonie CAPWAP w FortiOS i FortiSwitchManager.",
+          "W określonej, niepreferowanej konfiguracji lokalny nieuwierzytelniony atakujący z tej samej podsieci może wysyłać specjalnie przygotowane żądania i modyfikować konfigurację urządzenia.",
+          "Zakres podatnych wersji obejmuje kilka gałęzi FortiOS, a zaleceniem jest aktualizacja do wskazanych wydań naprawczych albo migracja z gałęzi niewspieranych.",
+          "Fortinet podaje także obejścia konfiguracyjne, w tym ograniczenie dostępu Security Fabric do interfejsów i kontrolę autoryzacji urządzeń.",
+          "Ryzyko rośnie, gdy włączone są mechanizmy automatycznej autoryzacji urządzeń rozszerzających, bo wtedy ścieżka wykorzystania może być prostsza.",
+          "Dla administratorów FortiGate priorytetem jest przegląd konfiguracji interfejsów, aktualizacja oraz weryfikacja, czy w środowisku nie ma nieautoryzowanych urządzeń w segmentach zarządzających."
+        ],
+        links: [
+          "https://www.tenable.com/plugins/nessus/306464",
+          "https://www.fortiguard.com/psirt/FG-IR-26-125"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Luka umożliwiająca podszywanie się pod serwer Microsoft SharePoint",
+        summary: [
+          "CVE-2026-32201 to podatność spoofingowa w Microsoft SharePoint Server, którą Microsoft ujął w kwietniowym cyklu poprawek.",
+          "Błędy tego typu mogą umożliwiać atakującemu tworzenie sytuacji, w której użytkownik lub system ufa fałszywemu kontekstowi komunikacji.",
+          "W przypadku SharePoint ryzyko ma wymiar biznesowy, ponieważ platforma często przechowuje dokumenty, workflow i dane projektowe o dużej wartości.",
+          "Rapid7 wskazuje ten problem jako znaną wykorzystywaną lukę zero-day w zestawie kwietniowych poprawek, co zwiększa pilność aktualizacji.",
+          "Administratorzy powinni weryfikować ekspozycję instancji, przyspieszyć wdrożenie poprawek i monitorować nietypowe żądania oraz aktywność użytkowników.",
+          "W środowiskach krytycznych warto połączyć patching z przeglądem logów, reguł WAF i uprawnień do bibliotek dokumentów."
+        ],
+        links: ["https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2026-32201"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Szereg podatności w Google Chrome",
+        summary: [
+          "Google opublikował aktualizację stabilnego kanału Chrome dla desktopów, obejmującą poprawki bezpieczeństwa dla wielu podatności.",
+          "Biuletyny Chrome zwykle nie ujawniają pełnych szczegółów technicznych od razu, aby ograniczyć ryzyko wykorzystania luk przed aktualizacją większości użytkowników.",
+          "HKCERT klasyfikuje pakiet jako zestaw wielu podatności, co jest typowe dla przeglądarek będących jednym z głównych celów exploitów client-side.",
+          "W praktyce najważniejszym działaniem jest szybkie wymuszenie aktualizacji przeglądarek w organizacji i sprawdzenie wersji na urządzeniach zarządzanych.",
+          "Zespoły SOC powinny korelować te aktualizacje z alertami dotyczącymi drive-by download, exploitów renderer/V8 i podejrzanych procesów potomnych Chrome.",
+          "Dla użytkowników końcowych istotne jest ponowne uruchomienie przeglądarki, bo sama instalacja aktualizacji często nie kończy procesu łatania."
+        ],
+        links: [
+          "https://chromereleases.googleblog.com/",
+          "https://chromereleases.googleblog.com/2026/04/stable-channel-update-for-desktop_15.html",
+          "https://www.hkcert.org/security-bulletin/google-chrome-multiple-vulnerabilities_20260416"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Cisco Identity Services Engine: RCE i path traversal",
+        summary: [
+          "Cisco opublikowało krytyczny advisory dla Identity Services Engine dotyczący podatności umożliwiających zdalne wykonanie kodu i przechodzenie przez ścieżki.",
+          "W advisory wymieniono CVE-2026-20147 i CVE-2026-20148, a Cisco wskazuje brak obejść, co podnosi znaczenie aktualizacji.",
+          "ISE jest komponentem kontroli dostępu do sieci, więc kompromitacja takiego systemu może mieć efekt znacznie szerszy niż przejęcie pojedynczej aplikacji.",
+          "RCE na ISE może oznaczać ryzyko manipulacji politykami dostępu, zbierania informacji o urządzeniach i użytkownikach oraz ruchu bocznego.",
+          "Administratorzy powinni traktować ten advisory jako priorytet dla okien serwisowych i sprawdzić, czy interfejsy administracyjne nie są nadmiernie eksponowane.",
+          "Po aktualizacji warto przejrzeć logi administracyjne, nowe konta, zmiany polityk i nietypową aktywność w integracjach AAA."
+        ],
+        links: [
+          "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-rce-traversal-8bYndVrZ",
+          "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ise-rce-traversal-8bYndVrZ"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Podatności w PHP Composer przez Perforce VCS",
+        summary: [
+          "Composer 2.9.6 usuwa dwie podatności command injection związane z obsługą sterownika Perforce VCS.",
+          "Problem polegał na tym, że określone wartości konfiguracji repozytorium mogły doprowadzić do wykonania poleceń systemowych w kontekście procesu Composer.",
+          "Ryzyko jest szczególnie ważne w pipeline CI/CD, gdzie Composer działa automatycznie i często ma dostęp do tokenów, artefaktów oraz środowisk buildowych.",
+          "Atak mógłby zostać uruchomiony przez złośliwie przygotowany pakiet, repozytorium albo konfigurację zależności, jeśli organizacja korzysta z podatnej wersji.",
+          "Packagist zaleca aktualizację, a zespoły powinny zweryfikować cache buildów, obrazy kontenerowe i lockfile w projektach PHP.",
+          "To kolejny przykład, że narzędzia developerskie i menedżery pakietów muszą być traktowane jako część powierzchni ataku łańcucha dostaw."
+        ],
+        links: [
+          "https://securityaffairs.com/190824/security/php-composer-flaws-enable-remote-command-execution-via-perforce-vcs.html",
+          "https://blog.packagist.com/composer-2-9-6-perforce-driver-command-injection-vulnerabilities/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Microsoft Defender: luka umożliwiająca podniesienie uprawnień",
+        summary: [
+          "CVE-2026-33825 dotyczy podatności elevation of privilege w Microsoft Defender, czyli komponencie obecnym w dużej części środowisk Windows.",
+          "Microsoft oznaczył lukę jako publicznie ujawnioną w kontekście kwietniowego Patch Tuesday, co zwiększa szansę szybkiego odtworzenia techniki przez atakujących.",
+          "Podniesienie uprawnień zwykle nie jest pierwszym etapem włamania, ale bardzo często pozwala przejść od dostępu użytkownika do trwałego przejęcia hosta.",
+          "Szczególnie ważne jest utrzymanie aktualnych definicji, komponentów platformy Defender oraz poprawek systemowych, bo Defender składa się z kilku warstw.",
+          "SOC powinien obserwować próby wyłączania ochrony, manipulacji usługami bezpieczeństwa i nietypowe zachowanie procesów Defendera.",
+          "W środowiskach o podwyższonym ryzyku warto zestawić patching z zasadami tamper protection i kontrolą lokalnych administratorów."
+        ],
+        links: ["https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2026-33825"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Mirax: nowy Android RAT rozprzestrzenia się przez reklamy Meta",
+        summary: [
+          "Mirax to nowy Android RAT obserwowany w kampaniach wymierzonych w użytkowników w Europie, dystrybuowany jako malware-as-a-service.",
+          "Według analiz kampania wykorzystywała reklamy na platformach Meta, które kierowały użytkowników do stron udających aplikacje IPTV i zachęcały do sideloadingu APK.",
+          "Po instalacji malware przechodzi wieloetapowy proces infekcji, używa pakowania i szyfrowania, a następnie uzyskuje możliwości zdalnej kontroli urządzenia.",
+          "Mirax potrafi wykonywać nakładki, przechwytywać dane, obserwować ekran, zarządzać aplikacjami i wykradać obrazy lub tekst.",
+          "Szczególnie niepokojąca jest funkcja SOCKS5, która może zmienić zainfekowany telefon w residential proxy dla dalszej działalności przestępczej.",
+          "Obrona wymaga blokowania instalacji spoza zaufanych źródeł, edukacji użytkowników i monitorowania kampanii reklamowych podszywających się pod popularne usługi."
+        ],
+        links: [
+          "https://securityaffairs.com/190842/uncategorized/mirax-malware-campaign-hits-220k-accounts-enables-full-remote-control.html",
+          "https://www.securityweek.com/mirax-rat-targeting-android-users-in-europe/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Patch Tuesday: Microsoft łata wiele luk w kluczowych systemach",
+        summary: [
+          "Kwietniowy Patch Tuesday Microsoftu obejmuje bardzo szeroki pakiet poprawek, w tym podatności w Windows, SharePoint, Defenderze, Active Directory i innych komponentach.",
+          "Rapid7 wskazuje m.in. znaną wykorzystywaną podatność spoofingową SharePoint Server oraz publicznie ujawnioną lukę elevation of privilege w Microsoft Defender.",
+          "W zestawie znajdują się także krytyczne błędy RCE, w tym w Windows Internet Key Exchange Service Extensions, ocenione bardzo wysoko w CVSS.",
+          "Dla organizacji kluczowa jest priorytetyzacja według ekspozycji: serwery publiczne, systemy tożsamości, usługi zdalne i stacje robocze użytkowników wysokiego ryzyka.",
+          "Patch Tuesday powinien uruchomić nie tylko proces aktualizacji, ale też krótką kampanię huntingu dla luk już wykorzystywanych lub publicznie znanych.",
+          "Warto zestawić listę poprawek z CMDB i EDR, aby szybko zobaczyć, które aktywa nadal pozostają poza harmonogramem łatania."
+        ],
+        links: [
+          "https://www.rapid7.com/blog/post/em-patch-tuesday-april-2026/",
+          "https://cyberpress.org/microsoft-april-2026-patch-tuesday-fixes-168-flaws-includes-actively-exploited-zero-day/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "JanaWare: nowa rodzina ransomware atakuje użytkowników komputerów",
+        summary: [
+          "JanaWare jest opisywane jako nowa rodzina ransomware obserwowana w atakach na użytkowników, ze szczególnym wskazaniem na kampanie wymierzone w Turcję.",
+          "Źródła wiążą aktywność z infekcjami, w których ransomware może pojawiać się obok narzędzi zdalnego dostępu, takich jak Adwind RAT.",
+          "Taki model łączenia ransomware i RAT zwiększa ryzyko, bo operator może najpierw przejąć kontrolę, rozpoznać środowisko, a dopiero później zaszyfrować dane.",
+          "W praktyce obrona wymaga monitorowania załączników, pobrań z nieznanych źródeł, nietypowych procesów Java oraz masowych operacji na plikach.",
+          "Użytkownicy indywidualni powinni traktować ten przypadek jako przypomnienie o kopiach zapasowych offline i ostrożności wobec pirackiego oprogramowania.",
+          "Dla zespołów bezpieczeństwa ważne będzie zebranie IOC, reguł detekcyjnych i sprawdzenie, czy rodzina zaczyna pojawiać się poza pierwotnym regionem kampanii."
+        ],
+        links: [
+          "https://cybersecuritynews.com/new-janaware-ransomware-targets-turkish-users/",
+          "https://sqmagazine.co.uk/janaware-ransomware-adwind-rat-turkey/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Fortinet łata krytyczne luki w FortiSandbox",
+        summary: [
+          "Fortinet opublikował poprawki dla zestawu podatności obejmujących FortiSandbox oraz inne produkty, w tym FortiOS, FortiAnalyzer i FortiManager.",
+          "Najważniejsze są krytyczne błędy w FortiSandbox, ponieważ sandbox często analizuje niebezpieczne pliki i ma dostęp do wrażliwych przepływów bezpieczeństwa.",
+          "Jeżeli taki system zostanie przejęty, atakujący może potencjalnie manipulować analizami, omijać detekcję albo wykorzystać integracje z innymi narzędziami bezpieczeństwa.",
+          "SecurityWeek i The Register podkreślają wagę szybkiego patchingu, szczególnie tam, gdzie FortiSandbox jest częścią centralnej infrastruktury SOC.",
+          "Administratorzy powinni sprawdzić wersje, dostępność interfejsów administracyjnych oraz logi pod kątem anomalii przed i po aktualizacji.",
+          "To kolejny przypadek, w którym systemy bezpieczeństwa same stają się atrakcyjnym celem i wymagają takiej samej dyscypliny hardeningu jak systemy produkcyjne."
+        ],
+        links: [
+          "https://www.securityweek.com/fortinet-patches-critical-fortisandbox-vulnerabilities/",
+          "https://cyberpress.org/fortinet-patches-11-vulnerabilities-across-fortisandbox-fortios-fortianalyzer-and-fortimanager/",
+          "https://fortiguard.fortinet.com/psirt",
+          "https://www.theregister.com/2026/04/15/critical_fortinet_sandbox_bugs/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Ivanti Neurons ITSM: podatności umożliwiają trwałe sesje",
+        summary: [
+          "Ivanti opublikował aktualizację bezpieczeństwa dla Ivanti Neurons for ITSM, obejmującą podatności związane z trwałością sesji.",
+          "W systemach ITSM takie błędy są istotne, bo platformy te często zawierają dane o użytkownikach, zmianach, incydentach i konfiguracji infrastruktury.",
+          "Utrzymanie sesji po warunkach, w których powinna zostać unieważniona, może ułatwić przejęcie konta lub wydłużyć okno działania po kompromitacji.",
+          "Organizacje powinny aktualizować system, wymuszać ponowne logowanie użytkowników i sprawdzać konfigurację SSO oraz tokenów sesyjnych.",
+          "Warto przejrzeć nietypowe aktywności w zgłoszeniach, zmianach uprawnień i integracjach API, bo ITSM bywa punktem startowym do rozpoznania środowiska.",
+          "Ten przypadek przypomina, że narzędzia administracyjne i procesowe często są równie wrażliwe jak systemy produkcyjne."
+        ],
+        links: [
+          "https://www.ivanti.com/blog/security-update-for-ivanti-neurons-for-itsm",
+          "https://www.secnews.gr/en/702924/ivanti-neurons-itsm-epimones-synedries/",
+          "https://gbhackers.com/ivanti-neurons-for-itsm-vulnerabilities/amp/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Malware atakuje użytkowników kryptowalut przez Obsidian",
+        summary: [
+          "Elastic Security Labs opisuje kampanię wymierzoną w użytkowników kryptowalut, która wykorzystuje Obsidian jako element łańcucha socjotechnicznego lub technicznego.",
+          "Obsidian jest popularnym narzędziem do notatek, więc atak na jego użytkowników może bazować na zaufaniu do lokalnych vaultów, pluginów lub plików Markdown.",
+          "Kampanie kryptowalutowe często celują w seed phrase, portfele, rozszerzenia przeglądarkowe, tokeny API i historię schowka.",
+          "Dla użytkowników najważniejsze jest rozdzielenie środowisk: notatki, przeglądarka i portfele nie powinny działać w jednym słabo kontrolowanym profilu.",
+          "Organizacje powinny zwrócić uwagę na ryzyko wśród pracowników technicznych, którzy przechowują w notatkach dane projektowe, sekrety albo informacje operacyjne.",
+          "Wniosek jest szerszy: narzędzia produktywności z ekosystemem pluginów stają się atrakcyjnym kanałem dostarczania malware i wykradania danych."
+        ],
+        links: [
+          "https://coinmarketcap.com/academy/article/new-malware-campaign-targets-crypto-users-through-obsidian-elastic-security-labs-reports",
+          "https://www.techflowpost.com/en-US/newsletter/119844",
+          "https://www.mexc.co/news/1028692"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Google Cloud Storage jako sposób omijania filtrów e-mail i dostarczania RAT",
+        summary: [
+          "Atakujący wykorzystują Google Cloud Storage do hostowania ładunków lub elementów kampanii, licząc na reputację infrastruktury Google.",
+          "Takie podejście pomaga omijać proste filtry pocztowe, które traktują domeny dużych dostawców chmury jako mniej podejrzane.",
+          "W kampanii celem jest dostarczenie RAT, czyli narzędzia umożliwiającego zdalną kontrolę nad zainfekowanym hostem.",
+          "Obrona nie powinna blokować całej chmury, ale analizować kontekst: świeże buckety, nietypowe ścieżki, pliki wykonywalne, archiwa i przekierowania.",
+          "Bramki e-mail powinny sprawdzać nie tylko domenę, lecz także reputację obiektu, typ pliku, zachowanie po kliknięciu i sandboxing.",
+          "Dla SOC ważne jest korelowanie kliknięć z późniejszym uruchomieniem procesów, połączeniami C2 i nietypową aktywnością PowerShell lub skryptów."
+        ],
+        links: ["https://cybersecuritynews.com/hackers-using-google-cloud-storage-to-bypass-email-filters/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Prorosyjscy hakerzy próbowali włamać się do elektrowni cieplnej",
+        summary: [
+          "Szwecja poinformowała o próbie zakłócenia działania elektrowni cieplnej, którą przypisuje grupie powiązanej z rosyjskimi służbami.",
+          "Atak miał miejsce wiosną 2025 roku i został zablokowany dzięki wbudowanym mechanizmom ochronnym obiektu.",
+          "Minister obrony cywilnej Szwecji wskazał, że prorosyjskie grupy przechodzą od prostych ataków DDoS do prób destrukcyjnych operacji przeciwko infrastrukturze.",
+          "Celem był system OT, czyli warstwa sterowania procesami przemysłowymi, gdzie skutki cyberataku mogą przełożyć się na fizyczne zakłócenia.",
+          "Incydent wpisuje się w szerszy wzorzec presji na europejską energetykę, obserwowany także w Polsce, Norwegii, Danii i Ukrainie.",
+          "Dla operatorów infrastruktury krytycznej najważniejsze pozostają segmentacja OT, monitoring anomalii, ćwiczenia scenariuszy destrukcyjnych i testy mechanizmów awaryjnych."
+        ],
+        links: [
+          "https://therecord.media/sweden-hackers-russia-power-plant",
+          "https://techcrunch.com/2026/04/15/sweden-blames-russian-hackers-for-attempting-destructive-cyberattack-on-thermal-plant/",
+          "https://abcnews.com/International/wireStory/sweden-blames-pro-russian-group-cyberattack-energy-infrastructure-132066405"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Rosyjscy hakerzy masowo włamują się do skrzynek ukraińskich prokuratorów",
+        summary: [
+          "Według doniesień Reutersa i danych Ctrl-Alt-Intel rosyjsko powiązana grupa miała przejąć ponad 170 kont e-mail prokuratorów i śledczych w Ukrainie.",
+          "Badacze wskazują, że od września 2024 do marca 2026 naruszono co najmniej 284 skrzynki, głównie w Ukrainie, ale również w państwach sąsiednich.",
+          "Operacja jest przypisywana Fancy Bear, czyli grupie kojarzonej z rosyjskim wywiadem wojskowym.",
+          "Cele obejmowały m.in. instytucje zajmujące się obronnością, antykorupcją i odzyskiwaniem aktywów, co sugeruje motyw wywiadowczy i polityczny.",
+          "Dostęp do korespondencji prokuratorów może ujawniać śledztwa, źródła, materiały dowodowe i informacje o sprawach przeciwko rosyjskim agentom.",
+          "Ten przypadek pokazuje, że ochrona poczty i MFA w instytucjach wymiaru sprawiedliwości jest elementem bezpieczeństwa państwa, a nie tylko IT."
+        ],
+        links: [
+          "https://kyivindependent.com/russia-hacks-over-over-170-accounts-of-ukrainian-prosecutors-investigators-reuters-reports/",
+          "https://militarnyi.com/en/news/reuters-russian-hackers-breach-over-170-email-accounts-of-ukrainian-prosecutors-and-investigators/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "WordPress Prismatic <= 3.7.3: unauthenticated stored XSS",
+        summary: [
+          "Wordfence opisuje podatność w pluginie WordPress Prismatic do wersji 3.7.3, pozwalającą na unauthenticated stored XSS przez mechanizm pseudo-shortcode.",
+          "Stored XSS jest groźniejszy od prostego reflected XSS, ponieważ złośliwy skrypt zostaje zapisany i może wykonywać się przy kolejnych odwiedzinach strony.",
+          "Brak wymogu uwierzytelnienia oznacza, że atak może być przeprowadzony z zewnątrz, jeśli podatna funkcja jest osiągalna.",
+          "Skutkiem może być kradzież sesji administratora, podstawienie treści, przekierowania, a w określonych warunkach przejęcie kontroli nad panelem.",
+          "Administratorzy WordPress powinni zaktualizować plugin, wyczyścić cache i sprawdzić treści zawierające nietypowe shortcode lub skrypty.",
+          "Warto również ograniczyć liczbę pluginów, monitorować integralność plików i używać WAF z regułami dla WordPress."
+        ],
+        links: ["https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/prismatic/prismatic-373-unauthenticated-stored-cross-site-scripting-via-prismatic-encoded-pseudo-shortcode"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Google Chrome nie zapewnia ochrony przed fingerprintingiem",
+        summary: [
+          "The Register opisuje krytykę Chrome dotyczącą braku skutecznej ochrony przed browser fingerprintingiem.",
+          "Fingerprinting polega na zbieraniu cech przeglądarki i urządzenia, takich jak system, rozdzielczość, fonty czy zachowanie API, aby tworzyć unikalny identyfikator użytkownika.",
+          "W przeciwieństwie do cookies użytkownik nie może łatwo usunąć takiego odcisku, dlatego technika jest istotnym problemem prywatności.",
+          "Autorzy wskazują, że wiele technik fingerprintingu działa w Chrome produkcyjnie, a nie tylko w warunkach laboratoryjnych.",
+          "Temat ma znaczenie nie tylko reklamowe, ale też operacyjne, bo dane śledzące są wykorzystywane w analityce, fraud detection i potencjalnie w nadzorze.",
+          "Dla użytkowników wrażliwych na prywatność wniosek jest taki, że sama popularność i bezpieczeństwo przeglądarki nie oznaczają automatycznie odporności na śledzenie."
+        ],
+        links: ["https://www.theregister.com/2026/04/16/google_chrome_lacks_browser_fingerprinting/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Windows Active Directory: luka umożliwia wykonanie złośliwego kodu",
+        summary: [
+          "W kwietniowym zestawie poprawek Microsoftu znalazła się luka RCE w Windows Active Directory oceniana jako istotna z punktu widzenia domen korporacyjnych.",
+          "Active Directory jest centralnym elementem tożsamości, więc skuteczne wykorzystanie podatności może mieć wpływ na uwierzytelnianie, uprawnienia i ruch boczny.",
+          "Źródła wskazują, że luka znajduje się w grupie problemów wymagających priorytetowej analizy przez administratorów Windows Server.",
+          "Nawet jeżeli exploitability nie oznacza automatycznego przejęcia całej domeny, systemy AD powinny być traktowane jako aktywa krytyczne.",
+          "Zalecane działania obejmują patching kontrolerów domeny, przegląd ekspozycji usług, kontrolę segmentacji i monitoring nietypowych żądań do usług katalogowych.",
+          "Warto też sprawdzić kopie zapasowe stanu systemu i procedury odzyskiwania AD, bo awaria lub kompromitacja katalogu szybko wpływa na całą organizację."
+        ],
+        links: [
+          "https://cybersecuritynews.com/microsoft-patch-tuesday-april-2026/",
+          "https://cybersecuritynews.com/windows-active-directory-vulnerability/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Composer 2.9.6 naprawia dwie luki Perforce command injection",
+        summary: [
+          "Laravel News opisuje wydanie Composer 2.9.6 jako aktualizację naprawiającą dwie podatności command injection w obsłudze Perforce.",
+          "Choć temat częściowo pokrywa się z advisory Packagist, ten wpis jest użyteczny dla developerów PHP, którzy śledzą ekosystem Laravel i Composer.",
+          "Największe ryzyko dotyczy automatycznych instalacji zależności w CI/CD, gdzie złośliwe repozytorium może uruchomić polecenia w środowisku builda.",
+          "Atak na narzędzie zależności jest szczególnie niebezpieczny, bo często działa w zaufanym procesie i ma dostęp do sekretów.",
+          "Rekomendacją jest szybka aktualizacja Composer, odświeżenie obrazów buildowych i wymuszenie bezpiecznych wersji w środowiskach developerskich.",
+          "Dodatkowo warto ograniczyć zaufanie do niestandardowych repozytoriów VCS oraz logować polecenia wykonywane w pipeline."
+        ],
+        links: ["https://laravel-news.com/composer-296-fixes-two-perforce-command-injection-vulnerabilities"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Krytyczna luka RCE w ShowDoc aktywnie wykorzystywana",
+        summary: [
+          "ShowDoc to platforma dokumentacyjna, a aktywnie wykorzystywana luka RCE w takim narzędziu może prowadzić do przejęcia serwera i danych projektowych.",
+          "Publiczne wykorzystanie podatności oznacza, że administratorzy nie powinni czekać na standardowy cykl utrzymaniowy.",
+          "Systemy dokumentacyjne często przechowują endpointy, tokeny przykładowe, architekturę usług i instrukcje operacyjne, więc ich kompromitacja ma wysoką wartość wywiadowczą.",
+          "Jeżeli instancja ShowDoc jest wystawiona do internetu, należy natychmiast sprawdzić wersję, ograniczyć dostęp i przejrzeć logi aplikacji.",
+          "Dobrą praktyką jest rotacja sekretów, które mogły być zapisane w dokumentacji, nawet jeśli nie ma bezpośredniego dowodu eksfiltracji.",
+          "Ten incydent przypomina, że narzędzia wspierające pracę zespołów developerskich są częścią powierzchni ataku i wymagają pełnego patch managementu."
+        ],
+        links: ["https://cybersecuritynews.com/showdoc-rce-vulnerability-exploited/amp/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "108 rozszerzeń Chrome powiązanych z eksfiltracją danych i kradzieżą sesji",
+        summary: [
+          "Socket i BleepingComputer opisują kampanię obejmującą ponad 100 rozszerzeń Chrome powiązanych ze wspólną infrastrukturą C2.",
+          "Rozszerzenia miały służyć do eksfiltracji danych i kradzieży sesji, czyli jednego z najcenniejszych celów w atakach na konta użytkowników.",
+          "Problem jest poważny, ponieważ rozszerzenia działają blisko przeglądarki, widzą strony, żądania i często mają bardzo szerokie uprawnienia.",
+          "Współdzielona infrastruktura C2 sugeruje skoordynowaną operację, a nie pojedynczy incydent z jednym dodatkiem.",
+          "Organizacje powinny wymuszać allowlistę rozszerzeń, blokować instalacje prywatne i monitorować anomalie w tokenach sesyjnych.",
+          "Użytkownicy powinni usuwać nieużywane dodatki i traktować rozszerzenia jak oprogramowanie z pełnym ryzykiem supply chain."
+        ],
+        links: [
+          "https://socket.dev/blog/108-chrome-ext-linked-to-data-exfil-session-theft-shared-c2",
+          "https://www.bleepingcomputer.com/news/security/over-100-chrome-extensions-in-web-store-target-users-accounts-and-data/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Poważna luka w Nginx UI: exploit publiczny i aktywne wykorzystanie",
+        summary: [
+          "Chodzi o krytyczną podatność w Nginx UI, a nie w samym podstawowym serwerze Nginx, co jest ważne dla poprawnej oceny ryzyka.",
+          "Advisory GitHub i publikacje branżowe wskazują na możliwość obejścia uwierzytelniania oraz aktywne wykorzystywanie luki.",
+          "Nginx UI często zarządza konfiguracją reverse proxy, certyfikatami i usługami, więc przejęcie panelu może szybko prowadzić do przejęcia ruchu lub konfiguracji.",
+          "Publiczny exploit istotnie skraca czas dostępny na reakcję, bo automatyczne skanery bardzo szybko zaczynają sprawdzać podatne instancje.",
+          "Administratorzy powinni zaktualizować Nginx UI, ograniczyć dostęp do panelu administracyjnego, sprawdzić konfiguracje i logi pod kątem zmian.",
+          "Dla zespołów CTI to dobry przykład rozróżniania marketingowych nagłówków od konkretnego produktu, wersji i ścieżki wykorzystania."
+        ],
+        links: [
+          "https://www.securityweek.com/exploited-vulnerability-exposes-nginx-servers-to-hacking/",
+          "https://pluto.security/blog/mcp-bug-nginx-security-vulnerability-cvss-9-8/",
+          "https://github.com/0xJacky/nginx-ui/security/advisories/GHSA-h6c2-x2m2-mwhf",
+          "https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild/",
+          "https://thehackernews.com/2026/04/critical-nginx-ui-vulnerability-cve.html"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "MCP supply chain advisory: RCE w ekosystemie AI",
+        summary: [
+          "OX Security opisuje rodzinę podatności RCE wynikających z niewłaściwej obsługi konfiguracji MCP STDIO w narzędziach AI.",
+          "Główny problem polega na tym, że aplikacje pozwalały użytkownikowi albo atakującemu podać polecenie i argumenty, które następnie były wykonywane jako proces systemowy.",
+          "Badacze wskazują wiele produktów i wariantów ataku, w tym konfiguracje przez UI, obejścia allowlist i scenariusze prompt injection modyfikujące lokalne pliki MCP.",
+          "Ryzyko jest duże, bo narzędzia agentowe często działają na maszynach developerów lub serwerach z dostępem do kodu, sekretów i repozytoriów.",
+          "Najważniejszą rekomendacją jest traktowanie konfiguracji MCP jako kodu wykonywalnego i stosowanie allowlist, izolacji oraz jasnego modelu zaufania.",
+          "Ten raport jest ważnym sygnałem, że łańcuch dostaw AI zaczyna mieć własne klasy podatności, których nie da się ocenić wyłącznie metodami tradycyjnego AppSec."
+        ],
+        links: ["https://www.ox.security/blog/mcp-supply-chain-advisory-rce-vulnerabilities-across-the-ai-ecosystem/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Złośliwe routery proxy LLM wykryte w sieci",
+        summary: [
+          "Risky Business opisuje badanie ekosystemu LLM routerów, czyli pośredników między agentami AI a dostawcami modeli.",
+          "Badacze testowali płatne i darmowe routery, szukając zachowań takich jak modyfikowanie odpowiedzi, wykradanie poświadczeń czy ukrywanie złośliwych poleceń.",
+          "Wykryto 28 złośliwych routerów, w tym takie, które wstrzykiwały komendy, używały opóźnionych triggerów albo próbowały uzyskać dostęp do canary credentials.",
+          "Szczególnie niebezpieczne jest to, że router może stać się punktem kompromitacji całej siatki agentów AI, a nie tylko pojedynczego zapytania.",
+          "W środowisku firmowym taki proxy ma dostęp do promptów, odpowiedzi, kosztów, metadanych i czasem sekretów przechodzących przez integracje.",
+          "Rekomendacja jest jasna: nie używać przypadkowych routerów LLM, wymagać kontroli dostawcy, logowania, izolacji sekretów i weryfikacji integralności odpowiedzi."
+        ],
+        links: ["https://news.risky.biz/risky-bulletin-malicious-llm-proxy-routers-found-in-the-wild/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Dragon Boss Solutions pozostawiła otwarte drzwi dla ponad 25 000 endpointów",
+        summary: [
+          "Huntress opisuje przypadek Dragon Boss Solutions, w którym problem z infrastrukturą dostawcy mógł narazić ponad 25 000 endpointów.",
+          "Sednem sprawy jest ryzyko wynikające z zależności od narzędzi zarządzających i zdalnych agentów, które mają szeroki dostęp do środowisk klientów.",
+          "Jeżeli domena, infrastruktura lub mechanizm aktualizacji takiego narzędzia zostaje źle zabezpieczony, konsekwencje mogą dotknąć wielu organizacji jednocześnie.",
+          "To klasyczny problem third-party risk, ale w wersji operacyjnej: słaby element dostawcy może stać się kanałem masowego przejęcia endpointów.",
+          "Organizacje powinny inwentaryzować agentów RMM, monitorować ich komunikację i oceniać, czy dostawcy mają dojrzały proces bezpieczeństwa.",
+          "Warto także stosować zasady najmniejszych uprawnień i segmentować dostęp narzędzi zarządzających, zamiast traktować je jako zaufane bezwarunkowo."
+        ],
+        links: [
+          "https://www.huntress.com/blog/pups-grow-fangs",
+          "https://cybersecuritynews.com/25000-endpoints-exposed-by-dragon-boss-solutions/"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Aktywność ransomware pozostaje wysoka, a nowe grupy zmieniają krajobraz",
+        summary: [
+          "GuidePoint Security wskazuje, że aktywność ransomware utrzymuje się na podwyższonym poziomie, mimo zmian w składzie i nazwach grup.",
+          "Rynek zagrożeń jest dynamiczny: część marek znika lub rebranduje się, a nowe grupy przejmują afiliantów, narzędzia i taktyki.",
+          "Dla obrońców oznacza to, że sama obserwacja nazw gangów jest niewystarczająca, bo istotniejsze są techniki dostępu początkowego, eksfiltracji i presji na ofiary.",
+          "Wysoki poziom aktywności wskazuje na trwałość modelu biznesowego podwójnego wymuszenia i brokerów dostępu.",
+          "Organizacje powinny koncentrować się na MFA, segmentacji, kopiach offline, szybkim wykrywaniu narzędzi administracyjnych używanych przez atakujących i ćwiczeniach IR.",
+          "Raport jest dobrym materiałem do aktualizacji mapy zagrożeń ransomware i priorytetów dla sektorów szczególnie często atakowanych."
+        ],
+        links: [
+          "https://sg.finance.yahoo.com/news/ransomware-activity-remains-elevated-threat-100200334.html",
+          "https://www.morningstar.com/news/business-wire/20260415918254/ransomware-activity-remains-elevated-as-new-threat-groups-reshape-the-landscape-guidepoint-security-finds",
+          "https://www.businesswire.com/news/home/20260415918254/en/Ransomware-Activity-Remains-Elevated-as-New-Threat-Groups-Reshape-the-Landscape-GuidePoint-Security-Finds"
+        ]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "VIPERTUNNEL: Python backdoor ukryty w fałszywej DLL i zaciemnionym loaderze",
+        summary: [
+          "Cryptika opisuje łańcuch ładowania, w którym backdoor VIPERTUNNEL napisany w Pythonie jest ukrywany w fałszywej bibliotece DLL.",
+          "Zaciemniony loader utrudnia analizę statyczną i pozwala rozdzielić widoczny komponent od właściwego payloadu.",
+          "Pythonowe backdoory są atrakcyjne dla atakujących, bo łatwo je rozwijać, pakować i integrować z gotowymi bibliotekami sieciowymi.",
+          "Fałszywa DLL może wskazywać na techniki side-loadingu albo podszywania się pod legalne komponenty aplikacji.",
+          "Dla analityków malware ważne jest sprawdzanie łańcucha uruchomienia, importów, nietypowych interpreterów, spakowanych archiwów i artefaktów Pythona.",
+          "W detekcji warto łączyć reguły plikowe z behawioralnymi: połączenia C2, tworzenie procesów potomnych, nietypowe ładowanie bibliotek i utrwalanie."
+        ],
+        links: ["https://www.cryptika.com/hackers-hide-vipertunnel-python-backdoor-inside-fake-dll-and-obfuscated-loader-chain-2/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Celowana kampania APT37: analiza",
+        summary: [
+          "Genians opisuje kampanię APT37 opartą na pretextingu, czyli przygotowaniu wiarygodnego kontekstu socjotechnicznego przed dostarczeniem złośliwego elementu.",
+          "APT37 jest grupą kojarzoną z Koreą Północną i często wykorzystuje tematy polityczne, badawcze lub zawodowe do zwiększenia skuteczności ataku.",
+          "W takich kampaniach technika techniczna jest tylko częścią problemu, bo kluczowe bywa dopasowanie narracji do ofiary.",
+          "Analiza jest użyteczna dla zespołów CTI, ponieważ pokazuje, jak aktorzy budują zaufanie, dobierają przynęty i używają etapowych łańcuchów infekcji.",
+          "Obrona wymaga monitorowania nie tylko IOC, ale też wzorców komunikacji, tematów przynęt i nietypowych kontaktów z osobami publicznymi lub ekspertami.",
+          "Dla organizacji pracujących z tematami geopolitycznymi, akademickimi i obronnymi to sygnał, że awareness musi obejmować ukierunkowane operacje, a nie tylko masowy phishing."
+        ],
+        links: ["https://www.genians.co.kr/en/blog/threat_intelligence/pretexting"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "LOLBins: techniki ataków opartych na MSBuild",
+        summary: [
+          "AhnLab analizuje wykorzystanie MSBuild jako LOLBin, czyli legalnego narzędzia systemowego używanego do celów ofensywnych.",
+          "MSBuild może uruchamiać kod w ramach procesu budowania projektu, co pozwala atakującym ukryć wykonanie w pozornie normalnej aktywności developerskiej lub administracyjnej.",
+          "Takie techniki są trudniejsze do blokowania niż klasyczny malware, bo bazują na zaufanych binariach obecnych w środowisku.",
+          "Ataki oparte na MSBuild mogą służyć do uruchamiania payloadów, obchodzenia prostych reguł aplikacyjnych i utrudniania analizy procesu.",
+          "Detekcja powinna obejmować nietypowe uruchomienia MSBuild poza kontekstem buildów, dziwne pliki projektów, argumenty i połączenia sieciowe z procesu.",
+          "To dobry przykład, że hardening środowisk Windows wymaga kontroli nad narzędziami developerskimi, a nie tylko blokowania znanych hashy."
+        ],
+        links: ["https://asec.ahnlab.com/en/93290/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "CyberAv3ngers: analiza irańskiej grupy APT",
+        summary: [
+          "Tenable opisuje CyberAv3ngers jako grupę powiązaną z IRGC i znaną z ataków na infrastrukturę krytyczną.",
+          "Grupa była kojarzona szczególnie z operacjami przeciwko systemom OT i ICS, w tym urządzeniom używanym w sektorze wodnym i przemysłowym.",
+          "Jej działalność pokazuje, że proste, słabo zabezpieczone komponenty przemysłowe mogą stać się celem aktorów państwowych lub quasi-państwowych.",
+          "W praktyce najważniejsze są podstawy: zmiana domyślnych haseł, ograniczenie ekspozycji paneli, segmentacja sieci i monitoring protokołów przemysłowych.",
+          "Analiza jest użyteczna dla zespołów zarządzających ryzykiem OT, bo łączy taktyki aktora z realnymi konsekwencjami dla infrastruktury.",
+          "CyberAv3ngers wpisuje się w szerszy trend wykorzystywania cyberoperacji do sygnalizacji politycznej i presji na państwa wspierające przeciwników Iranu."
+        ],
+        links: ["https://www.tenable.com/blog/what-to-know-about-cyberav3ngers-the-irgc-linked-group-targeting-critical-infrastructure"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Luki architektoniczne w agentowych przeglądarkach LLM",
+        summary: [
+          "Varonis analizuje architektoniczne słabości agentowych przeglądarek LLM, czyli narzędzi, które łączą model językowy z przeglądaniem internetu i wykonywaniem akcji.",
+          "Główne ryzyko wynika z mieszania niezaufanej treści webowej z instrukcjami dla agenta, co otwiera drogę do prompt injection.",
+          "Jeżeli agent ma dostęp do poczty, plików, aplikacji SaaS albo tokenów, złośliwa strona może próbować skłonić go do ujawnienia danych lub wykonania akcji.",
+          "Problem jest architektoniczny, bo nie da się go rozwiązać wyłącznie filtrem słów kluczowych; potrzebne są separacja kontekstów, polityki uprawnień i potwierdzanie działań wysokiego ryzyka.",
+          "Dla firm wdrażających agentów oznacza to konieczność projektowania granic zaufania podobnie jak w klasycznych systemach aplikacyjnych.",
+          "Materiał warto czytać jako ostrzeżenie, że agent AI z przeglądarką jest aktywnym użytkownikiem systemu, a nie neutralnym narzędziem do streszczania stron."
+        ],
+        links: ["https://www.varonis.com/blog/architectural-vulnerabilities-in-agentic-llm-browsers"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "30 wtyczek WordPress i backdoor w każdej z nich",
+        summary: [
+          "Anchor Host opisuje przypadek przejęcia lub zakupu wielu wtyczek WordPress, po którym do każdej dodano backdoor.",
+          "To przykład ataku supply chain na ekosystem pluginów, w którym zaufanie do istniejącego rozszerzenia jest wykorzystywane przeciwko administratorom stron.",
+          "Ryzyko jest szczególnie wysokie, gdy plugin ma aktywne instalacje, dobre opinie i historię legalnego działania, bo aktualizacja nie budzi podejrzeń.",
+          "Backdoor w pluginie może umożliwiać tworzenie kont, wykonywanie kodu, wstrzykiwanie treści SEO spam albo kradzież danych.",
+          "Administratorzy powinni monitorować zmiany właścicielskie pluginów, nietypowe aktualizacje, nowe endpointy i modyfikacje plików.",
+          "Dla organizacji korzystających z WordPressa to argument za ograniczeniem liczby wtyczek, stagingiem aktualizacji i skanowaniem kodu nawet dla popularnych dodatków."
+        ],
+        links: ["https://anchor.host/someone-bought-30-wordpress-plugins-and-planted-a-backdoor-in-all-of-them/"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "AI Memory Systems: The Approaches You Need to Know",
+        summary: [
+          "Artykuł porządkuje podejścia do pamięci w systemach AI, czyli mechanizmów pozwalających modelom utrzymywać kontekst dłużej niż pojedyncza sesja.",
+          "Pamięć może mieć formę krótkoterminowego kontekstu, baz wektorowych, profili użytkownika, pamięci epizodycznej albo jawnie zarządzanych notatek.",
+          "Dobrze zaprojektowana pamięć zwiększa użyteczność agentów, ale jednocześnie wprowadza ryzyka prywatności, retencji danych i niekontrolowanego wnioskowania.",
+          "W zastosowaniach enterprise kluczowe są polityki zapisu, kasowania, separacji użytkowników i audytu tego, co model zapamiętuje.",
+          "Systemy RAG nie są automatycznie bezpieczną pamięcią, bo błędna indeksacja, nadmierne uprawnienia albo prompt injection mogą ujawniać dane spoza intencji użytkownika.",
+          "Materiał jest dobrym punktem startowym dla projektantów agentów, którzy chcą świadomie dobrać pamięć do zadania, zamiast doklejać ją jako funkcję marketingową."
+        ],
+        links: ["https://hackernoon.com/ai-memory-systems-the-approaches-you-need-to-know"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "The Consensus Security Vulnerability Alert",
+        summary: [
+          "SANS Consensus Security Vulnerability Alert agreguje istotne podatności i nadaje im kontekst priorytetyzacji dla zespołów bezpieczeństwa.",
+          "Wydanie XXVI-14 obejmuje szeroką listę CVE, w tym błędy krytyczne w produktach sieciowych, aplikacjach webowych, bibliotekach i narzędziach developerskich.",
+          "Tego typu biuletyn jest przydatny, bo odciąża zespoły od ręcznego przeglądania wielu pojedynczych advisory i pomaga skupić się na wysokim ryzyku.",
+          "Największą wartością nie jest sama lista CVE, ale możliwość zestawienia jej z własną ekspozycją i stanem patch managementu.",
+          "Dla SOC i vulnerability managementu dobrym procesem jest cykliczne mapowanie alertu na CMDB, skanery, EDR i priorytety biznesowe.",
+          "Biuletyn należy traktować jako wejście do triage, a nie jako gotową kolejność łatania bez uwzględnienia lokalnego kontekstu."
+        ],
+        links: ["https://www.sans.org/newsletters/at-risk/xxvi-14"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "A Deep Dive on Tactical CTI and Operational CTI",
+        summary: [
+          "Tekst rozróżnia taktyczne i operacyjne CTI, czyli dwa poziomy pracy z informacją o zagrożeniach, które często są mylone.",
+          "Taktyczne CTI koncentruje się na konkretnych technikach, IOC, regułach detekcji i artefaktach użytecznych dla SOC oraz threat huntingu.",
+          "Operacyjne CTI patrzy szerzej: analizuje kampanie, aktorów, cele, motywacje i prawdopodobne kolejne działania przeciwnika.",
+          "Dojrzały program CTI potrzebuje obu warstw, bo same IOC szybko tracą wartość, a sama analiza strategiczna nie daje detekcji.",
+          "Materiał pomaga uporządkować produkty CTI pod odbiorców: analitycy SOC potrzebują innych informacji niż kierownictwo ryzyka czy incident commander.",
+          "Najważniejszy wniosek jest praktyczny: CTI musi kończyć się decyzją lub działaniem, inaczej pozostaje tylko kolekcją ciekawych raportów."
+        ],
+        links: ["https://adamgoss.medium.com/a-deep-dive-on-tactical-cti-and-operational-cti-bf4cbfb82b4b"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "My Bug Bounty Tool Stack (2026 Edition)",
+        summary: [
+          "Artykuł prezentuje aktualny zestaw narzędzi dla bug bounty hunterów, prawdopodobnie obejmujący rekonesans, fuzzing, proxy, automatyzację i zarządzanie wynikami.",
+          "Tego typu listy są wartościowe, jeśli pokazują nie tylko nazwy narzędzi, ale też miejsce każdego z nich w procesie testowania.",
+          "W 2026 roku skuteczny stack bug bounty musi łączyć klasyczne narzędzia webowe z automatyzacją OSINT, monitoringiem zmian i analizą API.",
+          "Największym ryzykiem jest ślepe kopiowanie tool stacku bez rozumienia ograniczeń, rate limitów i zasad programu.",
+          "Dla początkujących najważniejsze jest opanowanie metodyki i raportowania, bo narzędzia tylko przyspieszają pracę, ale nie zastępują myślenia.",
+          "Dla zespołów blue team taki materiał może być inspiracją do zrozumienia, jak zewnętrzni badacze patrzą na powierzchnię ataku organizacji."
+        ],
+        links: ["https://medium.com/bug-bounty-hunting-a-comprehensive-guide-in/my-bug-bounty-tool-stack-2026-edition-5bcd6d23928d"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "C2 Simulation Toolkit: 10 tools for realistic scenarios",
+        summary: [
+          "Materiał omawia narzędzia do symulacji C2, które pozwalają budować realistyczne scenariusze testów bezpieczeństwa i ćwiczeń purple team.",
+          "Symulacja C2 pomaga sprawdzić, czy organizacja wykrywa beaconing, staging payloadów, ruch przez proxy, komendy operatorskie i eksfiltrację.",
+          "Wartość takich narzędzi zależy od realistycznego scenariusza, a nie od samego uruchomienia frameworka.",
+          "Dobrze zaplanowane ćwiczenie powinno mieć zakres, zasady bezpieczeństwa, okno testowe, kontrolę ryzyka i jasny plan wycofania.",
+          "Blue team może wykorzystać wyniki do poprawy reguł EDR, NDR, SIEM oraz do lepszego zrozumienia luk w telemetrii.",
+          "Z perspektywy zarządzania ryzykiem symulacje C2 pokazują, czy detekcje działają w praktyce, a nie tylko istnieją w dokumentacji."
+        ],
+        links: ["https://medium.verylazytech.com/that-means-leveraging-c2-simulation-toolkits-the-kind-the-pros-use-to-mimic-multi-stage-c87d16d84862"]
+      },
+      {
+        section: "IT & Cybersecurity",
+        title: "Top 10 Burp Suite Extensions for Bug Bounty Hunters",
+        summary: [
+          "Artykuł przedstawia rozszerzenia Burp Suite przydatne w pracy bug bounty, prawdopodobnie obejmujące automatyzację testów, analizę parametrów i usprawnienie workflow.",
+          "Burp pozostaje centralnym narzędziem do testów aplikacji webowych, ale jego realna siła wynika z dobrania rozszerzeń do konkretnej metodyki.",
+          "Rozszerzenia mogą przyspieszać wykrywanie podatności, ale jednocześnie zwiększają ryzyko fałszywych pozytywów i nadmiernego ruchu do aplikacji.",
+          "Badacze powinni używać ich zgodnie z regulaminem programu, szczególnie przy skanerach aktywnych, fuzzingu i testach generujących duże obciążenie.",
+          "Dla zespołów AppSec lista jest przydatna, bo pokazuje, jakich klas automatyzacji używają zewnętrzni testerzy.",
+          "Najlepsze efekty daje połączenie rozszerzeń z ręczną analizą logiki biznesowej, której automatyczne skanery nadal nie rozumieją dobrze."
+        ],
+        links: ["https://medium.com/bug-bounty-hunting-a-comprehensive-guide-in/%EF%B8%8F-top-10-burp-suite-extensions-for-bug-bounty-hunters-dda6eca60617"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Wywiad czy zwalczanie destabilizacji? Priorytety polskich służb",
+        summary: [
+          "Materiał wideo dotyczy dylematu, jak polskie służby powinny równoważyć klasyczny wywiad z przeciwdziałaniem destabilizacji wewnętrznej i zewnętrznej.",
+          "W obecnym środowisku bezpieczeństwa granica między szpiegostwem, dezinformacją, sabotażem, cyberoperacjami i presją migracyjną staje się coraz mniej wyraźna.",
+          "Priorytety służb muszą więc obejmować zarówno pozyskiwanie informacji, jak i wczesne wykrywanie operacji wpływu oraz ochronę odporności państwa.",
+          "Dla Polski szczególnie ważny jest kontekst wojny Rosji przeciwko Ukrainie, aktywność rosyjskich i białoruskich służb oraz presja na infrastrukturę krytyczną.",
+          "Debata tego typu ma znaczenie dla cywilnego nadzoru, bo rosnące kompetencje służb powinny iść w parze z odpowiedzialnością i jasnymi ramami prawnymi.",
+          "Z perspektywy CTI warto obserwować, jak państwo definiuje destabilizację, bo będzie to wpływać na priorytety ochrony cyber, OSINT i kontrwywiadu."
+        ],
+        links: ["https://www.youtube.com/watch?v=4RWVCLIqcbw"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Kryzys Energetyczno-Logistyczny a Przyszłość Rynku Pracy",
+        summary: [
+          "Analiza MikroWizje opisuje, jak zakłócenia w cieśninie Ormuz mogą przełożyć się na ceny paliw, koszty transportu i presję na rynek pracy.",
+          "Wzrost kosztów energii uderza przede wszystkim w logistykę, produkcję, przemysł energochłonny i sektory o niskiej elastyczności kosztowej.",
+          "Firmy w takim scenariuszu ograniczają rekrutacje, redukują etaty operacyjne i przyspieszają automatyzację, aby zmniejszyć koszty stałe.",
+          "Najbardziej narażone są role powtarzalne, fizyczne i administracyjne, natomiast rośnie znaczenie kompetencji cyfrowych, analitycznych i technicznych.",
+          "Autor wskazuje, że kryzys może być nie tylko przejściowym szokiem, ale katalizatorem trwałej zmiany struktury zatrudnienia.",
+          "Wnioski dla państwa obejmują wzmacnianie rezerw, dywersyfikację dostaw energii, programy przekwalifikowania i regulacje wdrażania AI."
+        ],
+        links: ["https://www.mikrowizje.pl/p/kryzys-energetyczno-logistyczny-a"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Are Scientists with Knowledge of U.S. Secrets Disappearing? The Facts Tell a Different Story",
+        summary: [
+          "The Debrief analizuje narrację sugerującą znikanie naukowców posiadających wiedzę o amerykańskich sekretach i konfrontuje ją z dostępnymi faktami.",
+          "Tekst najprawdopodobniej rozdziela sensacyjne twierdzenia od zweryfikowanych danych, pokazując, że część historii może wynikać z błędnych powiązań albo nadinterpretacji.",
+          "Temat jest istotny, bo opowieści o tajnych programach, naukowcach i państwowych sekretach łatwo stają się paliwem dla teorii spiskowych.",
+          "Dobra analiza OSINT powinna w takich przypadkach sprawdzać daty, źródła pierwotne, status osób, dokumenty sądowe i zwykłe wyjaśnienia administracyjne.",
+          "Wnioskiem dla odbiorcy jest ostrożność wobec narracji, które łączą pojedyncze przypadki w duży spisek bez mocnego materiału dowodowego.",
+          "Dla analityków wpływu informacyjnego to przykład, jak tematy bezpieczeństwa narodowego mogą być wykorzystywane do budowy angażujących, lecz słabo udokumentowanych narracji."
+        ],
+        links: ["https://thedebrief.org/are-scientists-with-knowledge-of-u-s-secrets-disappearing-the-facts-tell-a-different-story/"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Kaskada ryzyka: globalne skutki konfliktu wokół Iranu i blokady cieśniny Ormuz",
+        summary: [
+          "Analiza przedstawia konflikt wokół Iranu i możliwą blokadę cieśniny Ormuz jako zdarzenie o skutkach kaskadowych dla gospodarki globalnej.",
+          "Ormuz jest jednym z najważniejszych punktów tranzytu ropy, więc zakłócenia szybko wpływają na ceny energii, inflację i koszty transportu.",
+          "Efekt nie ogranicza się do Bliskiego Wschodu, bo droższa energia przenosi presję na przemysł, logistykę, rynek pracy i stabilność społeczną w państwach importujących surowce.",
+          "W scenariuszu eskalacji rośnie również ryzyko cyberataków, sabotażu morskiego, presji na ubezpieczenia i opóźnień w łańcuchach dostaw.",
+          "Dla Europy i Polski kluczowe są dywersyfikacja źródeł energii, rezerwy strategiczne i odporność portów oraz korytarzy transportowych.",
+          "Materiał dobrze pokazuje, że współczesne ryzyko geopolityczne trzeba modelować jako sieć zależności, a nie pojedynczy konflikt regionalny."
+        ],
+        links: ["https://www.mikrowizje.pl/p/kaskada-ryzyka-globalne-skutki-konfliktu"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Konflikt wokół Iranu: strategiczne ryzyka dla Bliskiego Wschodu i Europy",
+        summary: [
+          "CSNN analizuje konflikt wokół Iranu jako źródło strategicznego ryzyka dla Bliskiego Wschodu, Europy i globalnych przepływów energii.",
+          "Eskalacja może obejmować działania militarne, presję na żeglugę, ataki proxy, operacje cybernetyczne i kampanie wpływu.",
+          "Dla Europy główne skutki to wzrost cen energii, napięcia polityczne, presja migracyjna oraz większe ryzyko ataków na infrastrukturę krytyczną.",
+          "Bliski Wschód może wejść w fazę większej niestabilności, jeśli lokalni aktorzy zaczną reagować na działania Iranu, Izraela, USA lub państw Zatoki.",
+          "Analiza podkreśla potrzebę scenariuszowego myślenia o eskalacji, bo pojedynczy incydent morski lub cybernetyczny może wywołać reakcję łańcuchową.",
+          "Dla zespołów bezpieczeństwa oznacza to konieczność monitorowania nie tylko komunikatów politycznych, ale też ruchu morskiego, cen energii i aktywności cyber grup powiązanych z Iranem."
+        ],
+        links: ["https://civilsocietynewsnetwork.org/2026/04/14/iran-konflikt-analiza-strategiczna-eskalacja-bliski-wschod-europa/"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Intelligence Online’s Defamation Scandals",
+        summary: [
+          "CSNN opisuje kontrowersje wokół prywatnego newslettera Intelligence Online, przedstawiając je jako spór o granice dziennikarstwa, reputacji i narracji wywiadowczych.",
+          "Artykuł koncentruje się na zarzutach defamacyjnych oraz twierdzeniach, że publikacje mogły wpływać na wrażliwe narracje dotyczące francuskich i europejskich spraw bezpieczeństwa.",
+          "Ważnym elementem jest rozróżnienie między prywatnym medium a oficjalną instytucją wywiadowczą, bo styl raportowania może budować wrażenie autorytetu większego niż formalny status.",
+          "Tekst wskazuje na ryzyko używania anonimowych źródeł i quasi-wywiadowczego języka w sprawach, które mogą dotykać reputacji osób oraz działań instytucji.",
+          "Z perspektywy geopolitycznej problem dotyczy także tego, jak prywatne publikacje mogą wpływać na odbiór operacji hybrydowych, Rosji i bezpieczeństwa europejskiego.",
+          "Materiał warto czytać ostrożnie, oddzielając opisane zarzuty od faktów prawnie potwierdzonych, ale sam temat odpowiedzialności mediów wywiadowczych jest istotny."
+        ],
+        links: ["https://civilsocietynewsnetwork.org/2026/04/13/intelligence-online-defamation-french-eu-intelligence-interference/"]
+      },
+      {
+        section: "Geopolitics",
+        title: "Symulacje kwantowe jako nowe narzędzie badawcze",
+        summary: [
+          "MikroWizje opisuje symulacje kwantowe jako technologię, która zaczyna przechodzić od obietnicy teoretycznej do praktycznego narzędzia badawczego.",
+          "Kluczowy sygnał to rosnąca zgodność wyników urządzeń kwantowych z rzeczywistymi danymi eksperymentalnymi, zwłaszcza w złożonych układach fizycznych.",
+          "Największy potencjał dotyczy materiałów silnie skorelowanych, magnetyków, katalizatorów, nadprzewodników i innych systemów trudnych dla klasycznych obliczeń.",
+          "Autor podkreśla, że nawet urządzenia NISQ, mimo błędów i ograniczeń, mogą być użyteczne dla wybranych klas problemów, jeśli są dobrze benchmarkowane.",
+          "W perspektywie państwowej technologie kwantowe stają się elementem suwerenności technologicznej, bezpieczeństwa i konkurencyjności naukowej.",
+          "Długoterminowo symulacje kwantowe mogą stać się trzecim filarem nauki obok teorii i eksperymentu, przyspieszając projektowanie materiałów i innowacji."
+        ],
+        links: ["https://www.mikrowizje.pl/p/symulacje-kwantowe-jako-nowe-narzedzie?utm_source=post-email-title&publication_id=6251754&post_id=193585826&utm_campaign=email-post-title&isFreemail=true&r=1wktm3&triedRedirect=true&utm_medium=email"]
+      }
+    ];
+
+    const cyberGrid = document.getElementById("cyberGrid");
+    const geoGrid = document.getElementById("geoGrid");
+
+    function articleCard(article, index) {
+      const sourceItems = article.links.map((link, sourceIndex) => `
+        <li><a href="${link}" target="_blank" rel="noopener noreferrer">Źródło ${sourceIndex + 1}: ${link}</a></li>
+      `).join("");
+
+      const paragraphs = article.summary.map(sentence => `<p>${sentence}</p>`).join("");
+
+      return `
+        <article class="article">
+          <div class="article-inner">
+            <div class="eyebrow">
+              <span>${article.section}</span>
+              <span>#${String(index + 1).padStart(2, "0")}</span>
+            </div>
+            <h3>${article.title}</h3>
+            <div class="summary">${paragraphs}</div>
+            <div class="sources">
+              <p class="sources-title">Źródła</p>
+              <ul>${sourceItems}</ul>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    const cyberArticles = articles.filter(article => article.section === "IT & Cybersecurity");
+    const geoArticles = articles.filter(article => article.section === "Geopolitics");
+
+    cyberGrid.innerHTML = cyberArticles.map(articleCard).join("");
+    geoGrid.innerHTML = geoArticles.map(articleCard).join("");
+
+    document.getElementById("totalCount").textContent = articles.length;
+    document.getElementById("cyberCount").textContent = cyberArticles.length;
+    document.getElementById("geoCount").textContent = geoArticles.length;
+    document.getElementById("cyberLabel").textContent = `${cyberArticles.length} wpisy`;
+    document.getElementById("geoLabel").textContent = `${geoArticles.length} wpisów`;
+  </script>
+</body>
+</html>
